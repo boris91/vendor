@@ -1,0 +1,25 @@
+{
+  "name": "hype",
+  "version": "1.0.0",
+  "description": "High Techs hype.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/boris91/hype.git"
+  },
+  "author": "Boris Karbanovich",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/boris91/hype/issues"
+  },
+  "homepage": "https://github.com/boris91/hype#readme",
+  "devDependencies": {
+    "express": "^4.14.0",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.12.2"
+  }
+}
