@@ -1,0 +1,2 @@
+# hype
+Fun techs hype.
