@@ -1,2 +1,6 @@
-document.querySelector('#root').innerText = 'Hype content.';
-module.hot.accept();//TODO: remove for live reload
+import 'babel-polyfill';
+import React from 'react';
+import { render } from 'react-dom';
+import App from './view';
+
+render(<App/>, document.querySelector('#root'));
