@@ -1,22 +1,18 @@
-var Express = require('express');
-var Webpack = require('webpack');
-var DevMidware = require('webpack-dev-middleware');
-var HotMidware = require('webpack-hot-middleware');
-var config = require('../../webpack.config');
+import Express from 'express';
+import Webpack from 'webpack';
+import DevMidware from 'webpack-dev-middleware';
+import HotMidware from 'webpack-hot-middleware';
+import config from '../../webpack.config';
 
-var compiler = Webpack(config);
-var devMidware = DevMidware(compiler, { noInfo: true, publicPath: config.output.publicPath });
-var hotMidware = HotMidware(compiler);
+const SERVER_OK_INFO = '==> Preparing... http://' + config.serverHost + ':' + config.serverPort + '/';
 
-var app = new Express();
+const compiler = Webpack(config);
+const devMidware = DevMidware(compiler, { noInfo: true, publicPath: config.output.publicPath });
+const hotMidware = HotMidware(compiler);
 
-app.use(devMidware);
-app.use(hotMidware);
-
-app.get('/', function(indexHtmlPath, req, res) {
-	res.sendFile(indexHtmlPath);
-}.bind(app, config.indexHtmlPath));
-
-app.listen(config.serverPort, function(info, error) {
-	error ? this.error(error) : this.info(info);
-}.bind(console, '==> Listening... http://' + config.serverHost + ':' + config.serverPort + '/'));
+const app = new Express();
+app
+	.use(devMidware)
+	.use(hotMidware)
+	.get('/', (req, res) => res.sendFile(config.indexHtmlPath))
+	.listen(config.serverPort, error => error ? console.error(error) : console.info(SERVER_OK_INFO));

@@ -1,12 +1,13 @@
-var path = require('path');
-var webpack = require('webpack');
-var occurOrderPlugin = new webpack.optimize.OccurenceOrderPlugin();
-var hmrPlugin = new webpack.HotModuleReplacementPlugin();
+import path from 'path';
+import webpack from 'webpack';
 
-var JS_RE = /\.js$/;
-var CLIENT_PATH = path.resolve(__dirname, 'src/client');
+const occurOrderPlugin = new webpack.optimize.OccurenceOrderPlugin();
+const hmrPlugin = new webpack.HotModuleReplacementPlugin();
 
-module.exports = {
+const JS_RE = /\.js$/;
+const CLIENT_PATH = path.resolve(__dirname, 'src/client');
+
+export default {
 	devtool: 'cheap-module-eval-source-map',
 
 	entry: [

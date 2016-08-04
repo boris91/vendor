@@ -4,7 +4,7 @@
   "description": "High Techs hype.",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server/index.js"
+    "start": "babel-node src/server/index.js --presets es2015,stage-0"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/boris91/hype#readme",
   "devDependencies": {
+    "babel-cli": "^6.11.4",
     "babel-core": "^6.11.4",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
