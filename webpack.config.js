@@ -1,5 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
+var occurOrderPlugin = new webpack.optimize.OccurenceOrderPlugin();
+var hmrPlugin = new webpack.HotModuleReplacementPlugin();
+
+var JS_RE = /\.js$/;
+var CLIENT_PATH = path.resolve(__dirname, 'src/client');
 
 module.exports = {
 	devtool: 'cheap-module-eval-source-map',
@@ -17,19 +22,20 @@ module.exports = {
 	},
 
 	module: {
+		preLoaders: [{
+			test: JS_RE,
+			loaders: ['eslint'],
+			include: [CLIENT_PATH]
+		}],
 		loaders: [{
+			test: JS_RE,
 			loaders: ['react-hot', 'babel-loader'],
-			include: [path.resolve(__dirname, 'src/client')],
-			test: /\.js$/,
+			include: [CLIENT_PATH],
 			plugins: ['transform-runtime']
 		}]
 	},
 
-	plugins: [
-		new webpack.optimize.OccurenceOrderPlugin(),
-		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoErrorsPlugin()
-	],
+	plugins: [occurOrderPlugin, hmrPlugin],
 
 	serverHost: 'localhost',
 	serverPort: 9000,
