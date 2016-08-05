@@ -3,12 +3,16 @@ import { connect } from 'react-redux';
 
 class App extends Component {
 	render() {
-		const { name, surname, age } = this.props.user;
+		const { userName, userSurname, userAge } = this.props;
 		return <div>
-			<p>Hey, {name} {surname}!</p>
-			<p>Are you {age} years old?</p>
+			<p>Hey, {userName} {userSurname}!</p>
+			<p>Are you {userAge} years old{'?'}</p>
 		</div>;
 	}
 };
 
-export default connect(state => state)(App);
+export default connect(state => ({
+	userName: state.user.name,
+	userSurname: state.user.surname,
+	userAge: state.user.age
+}))(App);
