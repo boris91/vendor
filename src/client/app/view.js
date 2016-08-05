@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class App extends Component {
+class App extends Component {
 	render() {
-		return <div>Hype content.</div>;
+		const { name, surname, age } = this.props.user;
+		return <div>
+			<p>Hey, {name} {surname}!</p>
+			<p>Are you {age} years old?</p>
+		</div>;
 	}
 };
+
+export default connect(state => state)(App);

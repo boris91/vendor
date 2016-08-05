@@ -5,10 +5,16 @@ const occurOrderPlugin = new webpack.optimize.OccurenceOrderPlugin();
 const hmrPlugin = new webpack.HotModuleReplacementPlugin();
 
 const JS_RE = /\.js$/;
-const CLIENT_PATH = path.resolve(__dirname, 'src/client');
+const CLIENT_PATH = [path.resolve(__dirname, 'src/client')];
 
 export default {
 	devtool: 'cheap-module-eval-source-map',
+
+	resolve: {
+		root: CLIENT_PATH,
+		extension: ['', '.js'],
+		modulesDirectories: ['node_modules']
+	},
 
 	entry: [
 		'webpack-hot-middleware/client',
@@ -26,12 +32,12 @@ export default {
 		preLoaders: [{
 			test: JS_RE,
 			loaders: ['eslint'],
-			include: [CLIENT_PATH]
+			include: CLIENT_PATH
 		}],
 		loaders: [{
 			test: JS_RE,
 			loaders: ['react-hot', 'babel-loader'],
-			include: [CLIENT_PATH],
+			include: CLIENT_PATH,
 			plugins: ['transform-runtime']
 		}]
 	},

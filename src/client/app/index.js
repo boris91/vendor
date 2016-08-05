@@ -1,6 +1,13 @@
-import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
-import App from './view';
+import { Provider } from 'react-redux';
+import initStore from 'app/store';
+import initialState from 'app/initial-state';
+import App from 'app/view';
 
-render(<App/>, document.querySelector('#root'));
+render(
+	<Provider store={initStore(initialState)}>
+		<App/>
+	</Provider>,
+	document.querySelector('#root')
+);
