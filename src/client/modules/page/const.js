@@ -1,0 +1,1 @@
+export const SET_YEAR = 'Page.SET_YEAR';
