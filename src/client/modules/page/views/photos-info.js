@@ -13,15 +13,20 @@ export default class PhotosInfo extends Component {
 	}
 
 	render() {
-		const { year, photos } = this.props;
-		return <div>
-			<p>{
+		const { year: currYear, photos } = this.props;
+		return <div className='page photos-info'>
+			<div className='years-list'>{
 				Object.keys(photos).map(year => (
-					<button key={year} data-year={year} onClick={this.onYearClick.bind(this)}>{year}</button>
+					<div className={'year' + (currYear === +year ? ' selected' : '')}
+						key={year}
+						data-year={year}
+						onClick={this.onYearClick.bind(this)}>
+						{year}
+					</div>
 				))
-			}</p>
-			<h3>Year {year}</h3>
-			<p>You have {photos[year].length} photos.</p>
+			}</div>
+			<h3 className='current-year'>Year {currYear}</h3>
+			<p className='gallery'>You have {photos[currYear].length} photos.</p>
 		</div>;
 	}
 };

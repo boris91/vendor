@@ -1,10 +1,13 @@
 import path from 'path';
 import webpack from 'webpack';
+import autoprefixer from 'autoprefixer';
+import precss from 'precss';
 
 const occurOrderPlugin = new webpack.optimize.OccurenceOrderPlugin();
 const hmrPlugin = new webpack.HotModuleReplacementPlugin();
 
 const JS_RE = /\.js$/;
+const LESS_RE = /\.less$/;
 const CLIENT_PATH = [path.resolve(__dirname, 'src/client')];
 
 export default {
@@ -39,8 +42,14 @@ export default {
 			loaders: ['react-hot', 'babel-loader'],
 			include: CLIENT_PATH,
 			plugins: ['transform-runtime']
+		}, {
+			test: LESS_RE,
+			loader: 'style!css!less!postcss',
+			include: CLIENT_PATH
 		}]
 	},
+
+	postcss: () => [autoprefixer],
 
 	plugins: [occurOrderPlugin, hmrPlugin],
 

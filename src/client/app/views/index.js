@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Greeting from 'modules/user/views/greeting';
 import PhotosInfo from 'modules/page/views/photos-info';
 import pageActions from 'modules/page/actions';
+import 'app/styles.less';
 
 const stateToProps = state => state;
 
@@ -15,7 +16,7 @@ class App extends Component {
 	render() {
 		const props = this.props;
 
-		return <div>
+		return <div id='app' className='app'>
 			<Greeting {...props.user}/>
 			<PhotosInfo {...props.page} actions={props.pageActions}/>
 		</div>;
