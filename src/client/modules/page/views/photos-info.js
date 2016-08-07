@@ -3,16 +3,16 @@ import PhotosGallery from 'modules/page/views/photos-gallery';
 
 export default class PhotosInfo extends Component {
 	static propTypes = {
-		year: PropTypes.number.isRequired,
 		photos: PropTypes.object.isRequired,
-		isFetching: PropTypes.bool.isRequired,
 		actions: PropTypes.object.isRequired
 	}
 
 	constructor(...args) {
 		super(...args);
-		const { year: currYear, photos: { [currYear]: currPhotos }, isFetching } = this.props;
-		if (!currPhotos && !isFetching) {
+		const { year: currYear, photos: { [currYear]: currPhotos } } = this.props;
+		if (!currYear) {
+			this.act('fetchYears');
+		} else if (!currPhotos) {
 			this.act('fetchPhotos', currYear);
 		}
 	}
