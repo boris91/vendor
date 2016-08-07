@@ -6,7 +6,13 @@ import PhotosInfo from 'modules/page/views/photos-info';
 import pageActions from 'modules/page/actions';
 import 'app/styles.less';
 
-const stateToProps = state => state;
+const stateToProps = state => ({
+	...state,
+	page: {
+		...state.page,
+		year: state.page.year || +Object.keys(state.page.photos)[0]
+	}
+});
 
 const dispatchToProps = dispatch => ({
 	pageActions: bindActionCreators(pageActions, dispatch)

@@ -1,19 +1,34 @@
 import React, { Component, PropTypes } from 'react';
+import PhotosGallery from 'modules/page/views/photos-gallery';
 
 export default class PhotosInfo extends Component {
 	static propTypes = {
 		year: PropTypes.number.isRequired,
 		photos: PropTypes.object.isRequired,
+		isFetching: PropTypes.bool.isRequired,
 		actions: PropTypes.object.isRequired
 	}
 
+	constructor(...args) {
+		super(...args);
+		const { year: currYear, photos: { [currYear]: currPhotos }, isFetching } = this.props;
+		if (!currPhotos && !isFetching) {
+			this.act('fetchPhotos', currYear);
+		}
+	}
+
+	act(name, ...args) {
+		this.props.actions[name](...args);
+	}
+
 	onYearClick(event) {
-		const year = +event.target.dataset.year;
-		this.props.actions.setYear(year);
+		const currYear = +event.target.dataset.year;
+		this.act('fetchPhotos', currYear);
 	}
 
 	render() {
-		const { year: currYear, photos } = this.props;
+		let { year: currYear, photos } = this.props;
+
 		return <div className='page photos-info'>
 			<div className='years-list'>{
 				Object.keys(photos).map(year => (
@@ -26,7 +41,7 @@ export default class PhotosInfo extends Component {
 				))
 			}</div>
 			<h3 className='current-year'>Year {currYear}</h3>
-			<p className='gallery'>You have {photos[currYear].length} photos.</p>
+			<PhotosGallery photos={photos[currYear]}/>
 		</div>;
 	}
 };

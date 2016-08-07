@@ -1,17 +1,29 @@
-import { SET_YEAR } from 'modules/page/const';
+import {
+	FETCH_PHOTOS_REQUEST,
+	FETCH_PHOTOS_RESPONSE
+} from 'modules/page/const';
 
 export default (initialPage) => {
-	return (page = initialPage, { type, payload: value }) => {
+	return (page = initialPage, { type, payload }) => {
 
 		switch (type) {
-			case SET_YEAR:
-				if (page.year !== value) {
-					return {
-						...page,
-						year: value
-					};
-				}
-				break;
+			case FETCH_PHOTOS_REQUEST:
+				return {
+					...page,
+					year: payload,
+					photos: {
+						...page.photos,
+						[payload]: null
+					}
+				};
+			case FETCH_PHOTOS_RESPONSE:
+				return {
+					...page,
+					photos: {
+						...page.photos,
+						[page.year]: payload
+					}
+				};
 		}
 
 		return page;

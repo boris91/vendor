@@ -1,8 +1,9 @@
 export default {
-	year: 2014,
+	year: 0,
+	isFetching: false,
 	photos: {
-		'2014': ['a', 'b'],
-		'2015': ['a', 'b', 'c'],
-		'2016': ['a', 'b', 'c', 'd']
+		'2014': null,
+		'2015': null,
+		'2016': null
 	}
 };
