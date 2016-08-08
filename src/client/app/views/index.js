@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
+//import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Greeting from 'modules/user/views/greeting';
-import PhotosInfo from 'modules/page/views/photos-info';
-import * as pageActions from 'modules/page/actions';
-import 'app/styles.less';
+import { Link } from 'react-router';
+import 'app/styles/index.less';
 
-const stateToProps = state => state;
-
-const dispatchToProps = dispatch => ({
-	pageActions: bindActionCreators(pageActions, dispatch)
-});
-
-class App extends Component {
+class AppLayout extends Component {
 	render() {
-		const props = this.props;
-
 		return <div id='app' className='app'>
-			<Greeting {...props.user}/>
-			<PhotosInfo {...props.page} actions={props.pageActions}/>
+			<div id='header' className='header'>
+				<Link to='home'>Home</Link>
+				<Link to='user'>User</Link>
+				<Link to='about'>About</Link>
+			</div>
+			{this.props.children}
+			<div id='footer' className='footer'>
+				AppFooter
+			</div>
 		</div>;
 	}
 };
 
-export default connect(stateToProps, dispatchToProps)(App);
+const stateToProps = state => state;
+const dispatchToProps = (/*dispatch*/) => ({ /*pageActions: bindActionCreators(pageActions, dispatch)*/ });
+export default connect(stateToProps, dispatchToProps)(AppLayout);
