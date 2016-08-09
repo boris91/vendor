@@ -5,7 +5,7 @@ import 'app/styles/user.less';
 
 class UserPage extends Component {
 	render() {
-		return <div id='user' className='user'>
+		return <div id='user' class='user'>
 			User page.
 		</div>;
 	}

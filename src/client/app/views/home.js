@@ -5,7 +5,7 @@ import 'app/styles/home.less';
 
 class HomePage extends Component {
 	render() {
-		return <div id='home' className='home'>
+		return <div id='home' class='home'>
 			Home page.
 		</div>;
 	}

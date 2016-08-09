@@ -7,14 +7,14 @@ import 'app/styles/index.less';
 
 class AppLayout extends Component {
 	render() {
-		return <div id='app' className='app'>
-			<div id='header' className='header'>
-				<Link to='home' className='btn btn-primary'>Home</Link>
-				<Link to='user' className='btn btn-default'>User</Link>
-				<Link to='about' className='btn btn-default'>About</Link>
+		return <div id='app' class='app'>
+			<div id='header' class='header'>
+				<Link to='home' class='btn btn-primary'>Home</Link>
+				<Link to='user' class='btn btn-default'>User</Link>
+				<Link to='about' class='btn btn-default'>About</Link>
 			</div>
 			{this.props.children}
-			<div id='footer' className='footer'>
+			<div id='footer' class='footer'>
 				AppFooter
 			</div>
 		</div>;

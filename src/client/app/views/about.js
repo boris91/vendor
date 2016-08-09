@@ -5,7 +5,7 @@ import 'app/styles/about.less';
 
 class AboutPage extends Component {
 	render() {
-		return <div id='about' className='about'>
+		return <div id='about' class='about'>
 			About page.
 		</div>;
 	}
