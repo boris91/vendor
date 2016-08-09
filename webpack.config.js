@@ -8,7 +8,9 @@ const hmrPlugin = new webpack.HotModuleReplacementPlugin();
 
 const JS_RE = /\.js$/;
 const LESS_RE = /\.less$/;
+const IMG_FONTS_RE = /\.(png|woff|woff2|eot|ttf|svg)$/;
 const CLIENT_PATH = [path.resolve(__dirname, 'src/client')];
+const BSTRAP_PATH = [path.resolve(__dirname, 'node_modules/bootstrap')];
 
 export default {
 	devtool: 'cheap-module-eval-source-map',
@@ -46,6 +48,14 @@ export default {
 			test: LESS_RE,
 			loader: 'style!css!less!postcss',
 			include: CLIENT_PATH
+		}, {
+			test: /\.css$/,
+			loader: 'style!css!postcss',
+			include: BSTRAP_PATH
+		}, {
+			test: IMG_FONTS_RE,
+			loader: 'url-loader?limit=100000',
+			include: BSTRAP_PATH
 		}]
 	},
 
