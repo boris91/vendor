@@ -1,8 +1,4 @@
-import getArticleAPI from './article';
-
-const apiGetters = [
-	getArticleAPI
-];
+import apiGetters from './all-apis';
 
 /*create APIs for all models and attach them to server*/
 export default (dbConnection, server) => {
