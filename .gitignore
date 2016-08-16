@@ -1,4 +1,6 @@
 .idea/
+db/diagnostic.data/
+db/journal/
+db/mongod.lock
 node_modules/
-dst/
 npm-debug.log
