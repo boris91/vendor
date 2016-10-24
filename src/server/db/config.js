@@ -1,4 +1,4 @@
-export default {
+module.exports = {
 	type: 'mongodb',
 	host: 'localhost',
 	port: 27017,

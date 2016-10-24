@@ -1,5 +1,5 @@
-import article from './article';
+const article = require('./article');
 
-export default [
+module.exports = [
 	article
 ];

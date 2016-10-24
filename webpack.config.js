@@ -1,7 +1,7 @@
-import path from 'path';
-import webpack from 'webpack';
-import autoprefixer from 'autoprefixer';
-import precss from 'precss';
+const path = require('path');
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const precss = require('precss');
 
 const occurOrderPlugin = new webpack.optimize.OccurenceOrderPlugin();
 const hmrPlugin = new webpack.HotModuleReplacementPlugin();
@@ -10,9 +10,8 @@ const JS_RE = /\.js$/;
 const LESS_RE = /\.less$/;
 const IMG_FONTS_RE = /\.(png|woff|woff2|eot|ttf|svg)$/;
 const CLIENT_PATH = [path.resolve(__dirname, 'src/client')];
-const BSTRAP_PATH = [path.resolve(__dirname, 'node_modules/bootstrap')];
 
-export default {
+module.exports = {
 	devtool: 'cheap-module-eval-source-map',
 
 	resolve: {
@@ -51,11 +50,11 @@ export default {
 		}, {
 			test: /\.css$/,
 			loader: 'style!css!postcss',
-			include: BSTRAP_PATH
+			include: CLIENT_PATH
 		}, {
 			test: IMG_FONTS_RE,
 			loader: 'url-loader?limit=100000',
-			include: BSTRAP_PATH
+			include: CLIENT_PATH
 		}]
 	},
 

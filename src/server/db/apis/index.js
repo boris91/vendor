@@ -1,7 +1,7 @@
-import apiGetters from './all-apis';
+const apiGetters = require('./all-apis');
 
 /*create APIs for all models and attach them to server*/
-export default (dbConnection, server) => {
+module.exports = (dbConnection, server) => {
 	const apis = {};
 
 	apiGetters.forEach(apiGetter => {

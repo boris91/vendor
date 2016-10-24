@@ -1,11 +1,11 @@
-import { Schema } from 'mongoose';
-import articleModelArgs from '../models/article';
+const Schema = require('mongoose').Schema;
+const articleModelArgs = require('../models/article');
 
 const EMPTY_OBJ = {};
 const SIMPLE_CB = (res, next) => (err, data) => err ? next(err) : res.send(data);
 
 /*get APIs for Article model*/
-export default dbConnection => {
+module.exports = dbConnection => {
 	articleModelArgs[1] = new Schema(articleModelArgs[1]);
 	const Article = dbConnection.model(...articleModelArgs);
 
