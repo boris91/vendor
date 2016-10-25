@@ -20,13 +20,6 @@ Fun techs hype.
 6. Run the app (via Web Browser):<br/>
 	`>` **`http://localhost:9000/`**
 
-##How to bundle the app main script
-
-1. Go through first 4 steps from first section<br/>
-2. Run prod-build command (via CLI):<br/>
-	`>` **`npm run prod`**
-3. See `bundle.js` file in `dst` directory.
-
 ##How to run the app for test purposes
 
 1. Go through first 4 steps from first section<br/>
@@ -36,3 +29,10 @@ Fun techs hype.
 	`>` _`webpack built {ID} in {N}ms`_
 3. Run the app (via Web Browser):<br/>
 	`>` **`http://localhost:9000/`**
+
+##How to bundle the app into distribution directory
+
+1. Go through first 4 steps from first section<br/>
+2. Run build command (via CLI):<br/>
+	`>` **`npm run build`**
+3. `index.html` & `index.js` files bundled into `dst` directory.
