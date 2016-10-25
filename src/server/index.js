@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const connectToDB = require('./db/index');
 const config = require('../../webpack.config');
 
-const SERVER_OK_INFO = '==> Preparing... http://' + config.serverHost + ':' + config.serverPort + '/';
+const SERVER_OK_INFO = `==> Preparing "${process.env.NODE_ENV}"-env for http://${config.serverHost}:${config.serverPort}`;
 const compiler = Webpack(config);
 const devMidware = DevMidware(compiler, { noInfo: true, publicPath: config.output.publicPath });
 const hotMidware = HotMidware(compiler);
@@ -15,8 +15,13 @@ const app = new Express();
 
 app
 	.use(devMidware)
-	.use(hotMidware)
-	.use(logger('dev'))
+	.use(hotMidware);
+
+if (process.env.NODE_ENV === 'dev') {
+	app.use(logger('dev'));
+}
+
+app
 	.use(bodyParser.urlencoded({ extended: true }))
 	.use(bodyParser.json())
 	.get('/', (req, res) => res.sendFile(config.indexHtmlPath))

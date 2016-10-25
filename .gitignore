@@ -1,4 +1,5 @@
 .idea/
 db/
+dst/
 node_modules/
 npm-debug.log
