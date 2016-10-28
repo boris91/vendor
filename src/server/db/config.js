@@ -1,6 +1,13 @@
 module.exports = {
 	type: 'mongodb',
-	host: 'localhost',
-	port: 27017,
-	name: 'hype'
+	user: 'anonymous',
+	pass: '123',
+	host: 'ds023664.mlab.com',
+	port: 23664,
+	name: 'driver-license-tests',
+
+	entities: [
+		'chapters',
+		'tickets'
+	]
 };

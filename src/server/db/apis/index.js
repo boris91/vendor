@@ -1,11 +1,12 @@
-const apiGetters = require('./all-apis');
+const entityApi = require('./entity-api');
+const Logger = require('../../utils/logger');
 
-/*create APIs for all models and attach them to server*/
-module.exports = (dbConnection, server) => {
+/*create APIs for all entities and attach them to server*/
+module.exports = (entities, db, server) => {
 	const apis = {};
 
-	apiGetters.forEach(apiGetter => {
-		const api = apiGetter(dbConnection);
+	entities.forEach(tableName => {
+		const api = entityApi(db, tableName);
 
 		Object.keys(api).forEach(method => {
 			const routesByMethod = apis[method] || (apis[method] = {});
@@ -13,10 +14,10 @@ module.exports = (dbConnection, server) => {
 
 			Object.keys(apiRoutes).forEach(route => {
 				if (routesByMethod[route]) {
-					throw `API route "${route}" already exists!`;
+					Logger.error(`API route "${route}" already exists!`);
 				} else {
 					routesByMethod[route] = apiRoutes[route];
-					server[method](route, apiRoutes[route]);
+					server[method](`/api/${route}`, apiRoutes[route]);
 				}
 			});
 		});
