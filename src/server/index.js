@@ -1,11 +1,37 @@
-import Webpack from 'webpack';
-import DevMidware from 'webpack-dev-middleware';
-import HotMidware from 'webpack-hot-middleware';
-import config from '../../webpack.config';
-import runExpressServer from './express';
+const Express = require('express');
+const Webpack = require('webpack');
+const DevMidware = require('webpack-dev-middleware');
+const HotMidware = require('webpack-hot-middleware');
+const bodyParser = require('body-parser');
+const Logger = require('./utils/logger');
+const connectToDB = require('./db/index');
+const config = require('../../webpack.config');
 
-const compiler = Webpack(config);
-const devMidware = DevMidware(compiler, { noInfo: true, publicPath: config.output.publicPath });
-const hotMidware = HotMidware(compiler);
+const runServer = () => {
+	const compiler = Webpack(config);
+	const devMidware = DevMidware(compiler, {noInfo: true, publicPath: config.output.publicPath});
+	const hotMidware = HotMidware(compiler);
+	const app = new Express();
 
-runExpressServer(devMidware, hotMidware);
+	app
+		.use(devMidware)
+		.use(hotMidware)
+		.use(bodyParser.urlencoded({extended: true}))
+		.use(bodyParser.json())
+		.get('/', (req, res) => res.sendFile(config.indexHtmlPath))
+		.listen(config.serverPort, error => {
+			if (error) {
+				Logger.error(error);
+			} else {
+				Logger
+					.pipe(process.env.NODE_ENV, 'cyan')
+					.pipe('-server is listening on ')
+					.pipe(`http://${config.serverHost}:${config.serverPort}`, 'cyan')
+					.print(true);
+			}
+		});
+
+	return app;
+};
+
+connectToDB(runServer);
