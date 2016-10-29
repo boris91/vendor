@@ -4,9 +4,11 @@
   "description": "High Techs hype.",
   "main": "index.js",
   "scripts": {
-    "start": "cmd\\start-dev",
-    "test": "cmd\\start-test",
-    "build": "cmd\\start-build"
+    "start": "cmd\\dev",
+    "test": "cmd\\test",
+    "test-client": "cmd\\test-client",
+    "test-server": "cmd\\test-server",
+    "build": "cmd\\build"
   },
   "repository": {
     "type": "git",
@@ -38,6 +40,7 @@
     "html-webpack-plugin": "^2.24.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "mocha": "^3.1.2",
     "nodemon": "^1.11.0",
     "postcss-loader": "^0.9.1",
     "precss": "^1.4.0",

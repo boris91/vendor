@@ -16,6 +16,7 @@ const entry = [
 ];
 const preLoaders = [];
 const plugins = [
+	new webpack.optimize.DedupePlugin(),
 	new webpack.optimize.OccurenceOrderPlugin(),
 	new HtmlWebpackPlugin({ template: 'src/client/app/index.html', inject: false })
 ];
@@ -30,13 +31,8 @@ switch (process.env.NODE_ENV) {
 		});
 		plugins.push(new webpack.HotModuleReplacementPlugin());
 		break;
-	case 'test':
-		//test
-		break;
 	case 'prod':
-		//minify
-		//uglify
-		//test
+		plugins.push(new webpack.optimize.UglifyJsPlugin());
 		break;
 }
 
