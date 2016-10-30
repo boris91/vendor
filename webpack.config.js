@@ -13,18 +13,18 @@ const CLIENT_PATH = [path.resolve(__dirname, 'src/client')];
 
 const entry = [
 	'babel-polyfill',
-	'./src/client/app/index'
+	'./src/client/index'
 ];
 const preLoaders = [];
 const plugins = [
 	new webpack.optimize.DedupePlugin(),
 	new webpack.optimize.OccurenceOrderPlugin(),
-	new HtmlWebpackPlugin({ template: 'src/client/app/index.html', inject: false })
+	new HtmlWebpackPlugin({ template: 'src/client/index.html', inject: false })
 ];
 let devtool;
 
 switch (process.env.NODE_ENV) {
-	case 'dev':
+	case 'development':
 		devtool = 'cheap-module-eval-source-map';
 		entry.unshift('webpack-hot-middleware/client');
 		preLoaders.push({
@@ -34,9 +34,10 @@ switch (process.env.NODE_ENV) {
 		});
 		plugins.push(new webpack.HotModuleReplacementPlugin());
 		break;
-	case 'prod':
+	case 'production':
 		devtool = 'cheap-source-map';
-		plugins.push(new webpack.optimize.UglifyJsPlugin());
+		plugins.push(new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }));
+		plugins.push(new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }));
 		break;
 }
 

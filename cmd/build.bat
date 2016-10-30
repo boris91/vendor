@@ -1,2 +1,2 @@
-set NODE_ENV=prod
+set NODE_ENV=production
 webpack
