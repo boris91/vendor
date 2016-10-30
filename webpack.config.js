@@ -5,6 +5,7 @@ const precss = require('precss');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const JS_RE = /\.js$/;
+const CSS_RE = /\.css$/;
 const HTML_RE = /\.html$/;
 const LESS_RE = /\.less$/;
 const IMG_FONTS_RE = /\.(png|woff|woff2|eot|ttf|svg)$/;
@@ -20,9 +21,11 @@ const plugins = [
 	new webpack.optimize.OccurenceOrderPlugin(),
 	new HtmlWebpackPlugin({ template: 'src/client/app/index.html', inject: false })
 ];
+let devtool;
 
 switch (process.env.NODE_ENV) {
 	case 'dev':
+		devtool = 'cheap-module-eval-source-map';
 		entry.unshift('webpack-hot-middleware/client');
 		preLoaders.push({
 			test: JS_RE,
@@ -32,12 +35,13 @@ switch (process.env.NODE_ENV) {
 		plugins.push(new webpack.HotModuleReplacementPlugin());
 		break;
 	case 'prod':
+		devtool = 'cheap-source-map';
 		plugins.push(new webpack.optimize.UglifyJsPlugin());
 		break;
 }
 
 module.exports = {
-	devtool: 'cheap-module-eval-source-map',
+	devtool,
 
 	resolve: {
 		root: CLIENT_PATH,
@@ -69,7 +73,7 @@ module.exports = {
 			loader: 'style!css!less!postcss',
 			include: CLIENT_PATH
 		}, {
-			test: /\.css$/,
+			test: CSS_RE,
 			loader: 'style!css!postcss',
 			include: CLIENT_PATH
 		}, {
