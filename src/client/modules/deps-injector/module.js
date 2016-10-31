@@ -11,12 +11,12 @@ const ModuleNamePrefix = {
 };
 
 const injector = {
-	resolve(nodeModules, funcs, services) {
+	resolve(diConfig) {
 		this._hub = {};
 		this._pending = {};
-		this._registerModules(ModuleType.NODE_MODULE, nodeModules)
-			._registerModules(ModuleType.FUNC, funcs)
-			._registerModules(ModuleType.SERVICE, services)
+		this._registerModules(ModuleType.NODE_MODULE, diConfig.nodeModules)
+			._registerModules(ModuleType.FUNC, diConfig.funcs)
+			._registerModules(ModuleType.SERVICE, diConfig.services)
 			._initPendingModules();
 	},
 

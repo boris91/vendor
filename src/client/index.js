@@ -1,7 +1,7 @@
 import config from 'config';
-import injectDeps from 'modules/deps-injector/index';
+import hub from 'modules/deps-injector/module';
 
-const hub = injectDeps(config.depcyInjection);
+hub.resolve(config.depcyInjection);
 
 const React = hub.get('#React');
 const ReactDom = hub.get('#ReactDom');

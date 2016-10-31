@@ -1,2 +1,2 @@
 set NODE_ENV=test
-mocha test/client/index test/server/index --compilers js:babel-core/register
+mocha src/client/tests/index src/server/tests/index --compilers js:babel-core/register

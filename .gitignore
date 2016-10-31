@@ -1,5 +1,4 @@
-.idea/
-db/
-dst/
-node_modules/
-npm-debug.log
+/.idea/
+/dst/
+/node_modules/
+/npm-debug.log
