@@ -1,6 +1,6 @@
 require('colors');
 const isDev = process.env.NODE_ENV === 'development';
-const STAMP = '[hype]'.white.bgBlue + ' ';
+const STAMP = '[vendor]'.white.bgBlue + ' ';
 
 class Log {
 	constructor(text, color1, color2, skipFirstStamp) {

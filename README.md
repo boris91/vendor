@@ -1,12 +1,12 @@
-# hype
-Fun techs hype.
+# vendor
+Vending machine web-emulator.
 
 ##How to run the app
 
 1. Clone this repo (via CLI):<br/>
-	`>` **`git clone https://github.com/boris91/hype.git`**
-2. Go to 'hype' directory (via CLI):<br/>
-	`>` **`cd hype`**
+	`>` **`git clone https://github.com/boris91/vendor.git`**
+2. Go to 'vendor' directory (via CLI):<br/>
+	`>` **`cd vendor`**
 3. Install all required packages (via CLI):<br/>
 	`>` **`npm install`**
 4. Start server on _localhost:9000_ (via CLI):<br/>
