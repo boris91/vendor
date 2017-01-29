@@ -4,11 +4,11 @@
   "description": "Vending machine web-emulator.",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development nodemon src/server/index",
-    "test": "NODE_ENV=test mocha src/client/tests/index src/server/tests/index --compilers js:babel-core/register",
-    "test-client": "NODE_ENV=test-client mocha src/client/tests/index --compilers js:babel-core/register",
-    "test-server": "NODE_ENV=test-server mocha src/server/tests/index --compilers js:babel-core/register",
-    "build": "NODE_ENV=production webpack"
+    "start": "set NODE_ENV=development & nodemon src/server/index",
+    "test": "set NODE_ENV=test & mocha src/client/tests/index src/server/tests/index --compilers js:babel-core/register",
+    "test-client": "set NODE_ENV=test-client & mocha src/client/tests/index --compilers js:babel-core/register",
+    "test-server": "set NODE_ENV=test-server & mocha src/server/tests/index --compilers js:babel-core/register",
+    "build": "set NODE_ENV=production & webpack"
   },
   "repository": {
     "type": "git",
