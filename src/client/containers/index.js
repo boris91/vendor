@@ -1,7 +1,9 @@
-import Layout from 'containers/layout/view';
-import Home from 'containers/home/view';
+import Home from './home/view';
+
+export {
+	Home
+};
 
 export default {
-	Layout,
 	Home
 };
