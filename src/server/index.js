@@ -24,7 +24,7 @@ const runServer = () => {
 				Logger.error(error);
 			} else {
 				Logger
-					.pipe(process.env.NODE_ENV || 'dev', 'cyan')
+					.pipe(process.env.NODE_ENV, 'cyan')
 					.pipe(' server is listening on ')
 					.pipe(`http://${config.serverHost}:${config.serverPort}`, 'cyan')
 					.print(true);
