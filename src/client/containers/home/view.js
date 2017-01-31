@@ -1,5 +1,7 @@
 import React from 'react';
-
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import modules from 'modules/index';
 import { VendingMachine } from 'components/index';
 import './style.less';
 
@@ -8,9 +10,9 @@ const currencyFormatter = new window.Intl.NumberFormat('en', {
 	currency: 'GBP'
 });
 
-export default class Home extends React.Component {
+class Home extends React.Component {
 	componentDidMount() {
-		this.actions.fillMachineWithProducts();
+		this.props.actions.fillMachineWithProducts();
 	}
 
 	render() {
@@ -22,3 +24,12 @@ export default class Home extends React.Component {
 		);
 	}
 };
+
+const allActions = Object.keys(modules).reduce((allActionsMap, name) => ({
+	...allActionsMap,
+	...modules[name].actions
+}), {});
+const mapStateToProps = state => ({ storeState: state });
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(allActions, dispatch) });
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
