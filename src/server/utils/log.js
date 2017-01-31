@@ -12,7 +12,7 @@ class Log {
 		return this;
 	}
 
-	pipe(text, color1, color2) {
+	pipe(text = '', color1, color2) {
 		color1 && (text = text[color1]);
 		color2 && (text = text[color2]);
 		this._text += text;

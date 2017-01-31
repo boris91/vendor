@@ -9,7 +9,7 @@ const allProducts = Object.keys(productsMockData).map(name => ({
 
 export default {
 	getAll() {
-		return new window.Promise(resolve => {
+		return new Promise(resolve => {
 			setTimeout(() => resolve(allProducts), 1.5);
 		});
 	}
