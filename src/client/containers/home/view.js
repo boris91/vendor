@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import modules from 'modules/index';
+import { actions } from 'modules/index';
 import { VendingMachine } from 'components/index';
 import './style.less';
 
@@ -25,11 +25,7 @@ class Home extends React.Component {
 	}
 };
 
-const allActions = Object.keys(modules).reduce((allActionsMap, name) => ({
-	...allActionsMap,
-	...modules[name].actions
-}), {});
-const mapStateToProps = state => ({ storeState: state });
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(allActions, dispatch) });
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(
+	state => ({ storeState: state }),
+	dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+)(Home);
