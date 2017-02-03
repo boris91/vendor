@@ -14,6 +14,14 @@ export default {
 		} catch (exc) {
 			dispatch(fillMachineWithProductsFail());
 		}
+	},
+
+	setProductForSale: (name, forSale) => dispatch => {
+		dispatch({
+			type: types.SET_PRODUCT_FOR_SALE,
+			name,
+			forSale
+		});
 	}
 };
 

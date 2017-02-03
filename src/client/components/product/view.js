@@ -9,32 +9,17 @@ export default class Product extends React.Component {
 		price: 0,
 		count: 0,
 		currencyFormatter: { format: value => value },
-		onAct: costDiff => costDiff
-	};
-
-	static propTypes = {
-		name: React.PropTypes.string,
-		image: React.PropTypes.string,
-		price: React.PropTypes.number,
-		count: React.PropTypes.number,
-		currencyFormatter: React.PropTypes.shape({
-			format: React.PropTypes.func
-		}),
-		onAct: React.PropTypes.func
+		onAct: (name, forSale) => ({ name, forSale })
 	};
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			forSale: 0
-		};
 		this.onDecClick = this.onForSaleClick.bind(this, -1);
 		this.onIncClick = this.onForSaleClick.bind(this, 1);
 	}
 
 	render() {
-		const { name, image, price, count, currencyFormatter } = this.props;
-		const { forSale } = this.state;
+		const { name, image, price, count, forSale, currencyFormatter } = this.props;
 		const stock = count - forSale;
 		const decBtnDisabled = 0 === forSale;
 		const incBtnDisabled = forSale === count;
@@ -55,12 +40,11 @@ export default class Product extends React.Component {
 	}
 
 	onForSaleClick(diff) {
-		const { count, price, onAct } = this.props;
-		const forSale = this.state.forSale + diff;
+		const { name, count, forSale, onAct } = this.props;
+		const nextForSale = forSale + diff;
 
-		if (0 <= forSale && forSale <= count) {
-			this.setState({ forSale });
-			onAct(price * diff);
+		if (0 <= nextForSale && nextForSale <= count) {
+			onAct(name, nextForSale);
 		}
 	}
 };

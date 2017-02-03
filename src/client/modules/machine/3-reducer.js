@@ -25,6 +25,15 @@ export default (state = initialState, action) => {
 				products: []
 			};
 
+		case types.SET_PRODUCT_FOR_SALE:
+			return {
+				...state,
+				products: state.products.map(product => product.name === action.name ? {
+					...product,
+					forSale: action.forSale
+				} : product)
+			};
+
 		default:
 			return state;
 	}

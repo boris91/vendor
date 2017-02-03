@@ -11,21 +11,33 @@ const currencyFormatter = new window.Intl.NumberFormat('en', {
 });
 
 class Home extends React.Component {
+	constructor(props) {
+		super(props);
+		this.onMachineProductAct = this.onMachineProductAct.bind(this);
+	}
+
 	componentDidMount() {
-		this.props.actions.fillMachineWithProducts();
+		this.fillMachineWithProducts();
 	}
 
 	render() {
 		const { machine } = this.props.storeState;
 		return (
 			<div className='home'>
-				<VendingMachine {...machine} currencyFormatter={currencyFormatter}/>
+				<VendingMachine {...machine} currencyFormatter={currencyFormatter} onProductAct={this.onMachineProductAct}/>
 			</div>
 		);
+	}
+
+	onMachineProductAct(name, forSale) {
+		this.setProductForSale(name, forSale);
 	}
 };
 
 export default connect(
 	state => ({ storeState: state }),
-	dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+	dispatch => {
+		Object.assign(Home.prototype, bindActionCreators(actions, dispatch));
+		return {};
+	}
 )(Home);
