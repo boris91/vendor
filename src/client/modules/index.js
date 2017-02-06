@@ -1,6 +1,8 @@
 import machine from './machine/index';
+import human from './human/index';
 
 const modules = {
+	human,
 	machine
 };
 

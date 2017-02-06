@@ -1,6 +1,4 @@
 .product {
-	user-select: none;
-	cursor: default;
 	display: flex;
 	flex: 1;
 	flex-direction: column;
@@ -50,16 +48,6 @@
 		}
 
 		> .btn {
-			border: none;
-			border-radius: 1em;
-			color: white;
-			opacity: 0.7;
-
-			&:hover:not([disabled]) {
-				cursor: pointer;
-				opacity: 0.9;
-			}
-
 			&.dec {
 				align-self: flex-start;
 				background: red;
@@ -69,11 +57,6 @@
 			&.inc {
 				align-self: flex-end;
 				background: green;
-				padding: 0.2em 0.3em;
-			}
-
-			&[disabled] {
-				opacity: 0.3;
 			}
 		}
 	}

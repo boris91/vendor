@@ -13,5 +13,32 @@ export default {
 		return new Promise(resolve => {
 			setTimeout(() => resolve(allProducts), 1.5);
 		});
+	},
+
+	getForSale(products) {
+		return products
+			.filter(product => !!product.forSale)
+			.map(product => ({
+				name: product.name,
+				image: product.image,
+				price: product.price,
+				count: product.forSale
+			}));
+	},
+
+	getUnsold(products) {
+		return products
+			.filter(product => !!(product.count - product.forSale))
+			.map(product => ({
+				...product,
+				count: product.count - product.forSale,
+				forSale: 0
+			}));
+	},
+
+	calcSumm(products) {
+		return products.reduce((summ, product) => {
+			return +(summ + product.price * product.count).toFixed(2);
+		}, 0);
 	}
 };

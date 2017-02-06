@@ -1,5 +1,5 @@
-import initialState from './0-initial-state';
-import types from './1-types';
+import initialState from './initial-state';
+import types from './types';
 
 export default (state = initialState, action) => {
 	switch (action.type) {
@@ -32,6 +32,12 @@ export default (state = initialState, action) => {
 					...product,
 					forSale: action.forSale
 				} : product)
+			};
+
+		case types.EJECT_PURCHASING_MACHINE_PRODUCTS:
+			return {
+				...state,
+				products: action.unsoldProducts
 			};
 
 		default:

@@ -1,6 +1,6 @@
 import productsApi from 'services/api/products';
 
-import types from './1-types';
+import types from './types';
 
 export default {
 	fillMachineWithProducts: () => async (dispatch) => {
@@ -21,6 +21,23 @@ export default {
 			type: types.SET_PRODUCT_FOR_SALE,
 			name,
 			forSale
+		});
+	},
+
+	checkPurchaseAbility: () => (dispatch, getState) => {
+		const { human: { cash }, machine: { products } } = getState();
+		const productsForSale = productsApi.getForSale(products);
+		const fullPrice = productsApi.calcSumm(productsForSale);
+		!!dispatch;//for linting purposes only
+		return 0 !== fullPrice && cash >= fullPrice;
+	},
+
+	ejectPurchasingMachineProducts: () => (dispatch, getState) => {
+		const { machine: { products } } = getState();
+		const unsoldProducts = productsApi.getUnsold(products);
+		dispatch({
+			type: types.EJECT_PURCHASING_MACHINE_PRODUCTS,
+			unsoldProducts
 		});
 	}
 };

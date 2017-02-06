@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actions } from 'modules/index';
-import { VendingMachine } from 'components/index';
+import { Human, VendingMachine } from 'components/index';
 import './style.less';
 
 const currencyFormatter = new window.Intl.NumberFormat('en', {
@@ -14,23 +14,39 @@ class Home extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onMachineProductAct = this.onMachineProductAct.bind(this);
+		this.onMachinePurchaseClick = this.onMachinePurchaseClick.bind(this);
 	}
 
 	componentDidMount() {
 		this.fillMachineWithProducts();
+		this.giveHumanSomeCash();
 	}
 
 	render() {
-		const { machine } = this.props.storeState;
+		const { machine, human } = this.props.storeState;
+		const isPurchaseAllowed = this.checkPurchaseAbility();
+
 		return (
 			<div className='home'>
-				<VendingMachine {...machine} currencyFormatter={currencyFormatter} onProductAct={this.onMachineProductAct}/>
+				<VendingMachine {...machine}
+					isPurchaseAllowed={isPurchaseAllowed}
+					currencyFormatter={currencyFormatter}
+					onProductAct={this.onMachineProductAct}
+					onPurchaseClick={this.onMachinePurchaseClick}
+				/>
+				<Human {...human} currencyFormatter={currencyFormatter}/>
 			</div>
 		);
 	}
 
 	onMachineProductAct(name, forSale) {
 		this.setProductForSale(name, forSale);
+	}
+
+	onMachinePurchaseClick() {
+		const { machine: { products } } = this.props.storeState;
+		this.ejectPurchasingMachineProducts();
+		this.purchaseProducts(products);
 	}
 };
 
