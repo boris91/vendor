@@ -7,8 +7,9 @@ export default class VendingMachine extends React.Component {
 	static defaultProps = {
 		products: [],
 		currencyFormatter: {format: value => value},
-		onProductAct: (name, forSale) => ({name, forSale}),
 		isPurchaseAllowed: false,
+		fullPrice: 0,
+		onProductAct: (name, forSale) => ({name, forSale}),
 		onPurchaseClick: () => {}
 	};
 
@@ -18,19 +19,20 @@ export default class VendingMachine extends React.Component {
 	}
 
 	render() {
-		const { products, currencyFormatter, onProductAct, isPurchaseAllowed } = this.props;
+		const { products, currencyFormatter, humanFreeCash, onProductAct, isPurchaseAllowed, fullPrice } = this.props;
 
 		return (
 			<div className='vending-machine'>
 				<div className='products'>
 					{products.map(product => (
 						<Product {...product}
-							isPurchaseAllowed={isPurchaseAllowed}
+							isPurchasable={humanFreeCash >= product.price}
 							currencyFormatter={currencyFormatter}
 							onAct={onProductAct}
 							key={product.name}/>
 					))}
 				</div>
+				<div className='full-price'>Full price: {currencyFormatter.format(fullPrice)}</div>
 				<div className='btn purchase' disabled={!isPurchaseAllowed} onClick={this.onPurchaseClick}>Buy</div>
 			</div>
 		);

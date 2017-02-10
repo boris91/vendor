@@ -22,10 +22,7 @@ export default (state = initialState, action) => {
 		case types.PURCHASE_PRODUCTS:
 			return {
 				...state,
-				purchasedProducts: [
-					...state.purchasedProducts,
-					action.products
-				],
+				purchasedProducts: action.products,
 				cash: action.cash
 			};
 

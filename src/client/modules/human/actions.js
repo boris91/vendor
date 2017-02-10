@@ -18,8 +18,9 @@ export default {
 	},
 
 	purchaseProducts: allProducts => (dispatch, getState) => {
-		const { cash } = getState().human;
-		const products = productsApi.getForSale(allProducts);
+		const { cash, purchasedProducts } = getState().human;
+		const productsForSale = productsApi.getForSale(allProducts);
+		const products = productsApi.merge(purchasedProducts, productsForSale);
 		dispatch({
 			type: types.PURCHASE_PRODUCTS,
 			products,

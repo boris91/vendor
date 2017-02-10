@@ -15,10 +15,10 @@ export default class Human extends React.Component {
 
 		return (
 			<div className='human'>
-				<div className='cash'>Cash: {cash}</div>
+				<div className='cash'>Cash: {currencyFormatter.format(cash)}</div>
 				<div className='purchased-products'>
 					{purchasedProducts.map(product => (
-						<Product {...product} currencyFormatter={currencyFormatter} key={product.name}/>
+						<Product {...product} notForSale={true} currencyFormatter={currencyFormatter} key={product.name}/>
 					))}
 				</div>
 			</div>

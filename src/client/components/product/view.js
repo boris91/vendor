@@ -8,7 +8,9 @@ export default class Product extends React.Component {
 		image: '',
 		price: 0,
 		count: 0,
-		isPurchaseAllowed: false,
+		forSale: 0,
+		notForSale: false,
+		isPurchasable: false,
 		currencyFormatter: { format: value => value },
 		onAct: (name, forSale) => ({ name, forSale })
 	};
@@ -23,22 +25,30 @@ export default class Product extends React.Component {
 	}
 
 	render() {
-		const { name, image, price, count, forSale, isPurchaseAllowed, currencyFormatter } = this.props;
+		const { name, image, price, count, notForSale, forSale, isPurchasable, currencyFormatter } = this.props;
 		const stock = count - forSale;
 		const decBtnDisabled = 0 === forSale;
-		const incBtnDisabled = forSale === count || (0 !== forSale && !isPurchaseAllowed);
+		const incBtnDisabled = forSale === count || !isPurchasable;
 
 		return (
 			<div className='product'>
 				<img className='image' src={image}/>
 				<div className='name'>{name}</div>
-				<div className='price'>{currencyFormatter.format(price)}</div>
+				{
+					notForSale ? null : (
+						<div className='price'>{currencyFormatter.format(price)}</div>
+					)
+				}
 				<div className='stock'>{stock}</div>
-				<div className='for-sale'>
-					<div className='btn dec' ref={this.onDecRef} disabled={decBtnDisabled} onClick={this.onDecClick}>-</div>
-					<div className='count'>{forSale}</div>
-					<div className='btn inc' ref={this.onIncRef} disabled={incBtnDisabled} onClick={this.onIncClick}>+</div>
-				</div>
+				{
+					notForSale ? null : (
+						<div className='for-sale'>
+							<div className='btn dec' ref={this.onDecRef} disabled={decBtnDisabled} onClick={this.onDecClick}>-</div>
+							<div className='count'>{forSale}</div>
+							<div className='btn inc' ref={this.onIncRef} disabled={incBtnDisabled} onClick={this.onIncClick}>+</div>
+						</div>
+					)
+				}
 			</div>
 		);
 	}

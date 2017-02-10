@@ -24,12 +24,17 @@ export default {
 		});
 	},
 
-	checkPurchaseAbility: () => (dispatch, getState) => {
+	getFullPrice: () => (dispatch, getState) => {
+		const { machine: { products } } = getState();
+		const productsForSale = productsApi.getForSale(products);
+		return productsApi.calcSumm(productsForSale);
+	},
+
+	getHumanFreeCash: () => (dispatch, getState) => {
 		const { human: { cash }, machine: { products } } = getState();
 		const productsForSale = productsApi.getForSale(products);
 		const fullPrice = productsApi.calcSumm(productsForSale);
-		!!dispatch;//for linting purposes only
-		return 0 !== fullPrice && cash >= fullPrice;
+		return cash - fullPrice;
 	},
 
 	ejectPurchasingMachineProducts: () => (dispatch, getState) => {

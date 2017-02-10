@@ -36,6 +36,23 @@ export default {
 			}));
 	},
 
+	merge(aProducts, bProducts) {
+		aProducts = aProducts.slice();
+		bProducts = bProducts.slice();
+		return aProducts
+			.map(a => {
+				bProducts.forEach((b, i) => {
+					if (b.name === a.name) {
+						a.count += b.count;
+						bProducts.splice(i, 1);
+						return false;
+					}
+				});
+				return a;
+			})
+			.concat(bProducts);
+	},
+
 	calcSumm(products) {
 		return products.reduce((summ, product) => {
 			return +(summ + product.price * product.count).toFixed(2);

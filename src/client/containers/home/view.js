@@ -24,12 +24,15 @@ class Home extends React.Component {
 
 	render() {
 		const { machine, human } = this.props.storeState;
-		const isPurchaseAllowed = this.checkPurchaseAbility();
+		const humanFreeCash = this.getHumanFreeCash();
+		const fullPrice = this.getFullPrice();
 
 		return (
 			<div className='home'>
 				<VendingMachine {...machine}
-					isPurchaseAllowed={isPurchaseAllowed}
+					humanFreeCash={humanFreeCash}
+					fullPrice={fullPrice}
+					isPurchaseAllowed={0 < fullPrice}
 					currencyFormatter={currencyFormatter}
 					onProductAct={this.onMachineProductAct}
 					onPurchaseClick={this.onMachinePurchaseClick}
