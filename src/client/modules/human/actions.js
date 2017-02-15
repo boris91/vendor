@@ -24,7 +24,7 @@ export default {
 		dispatch({
 			type: types.PURCHASE_PRODUCTS,
 			products,
-			cash: +(cash - productsApi.calcSumm(products)).toFixed(2)
+			cash: +(cash - productsApi.calcSumm(productsForSale)).toFixed(2)
 		});
 	}
 };
